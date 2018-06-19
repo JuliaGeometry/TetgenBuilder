@@ -25,6 +25,9 @@ deploy:
   provider: releases
   api_key:
     secure: l8bsKHICBBxN/1vKa/FlMWsI0sbJoE6i7WQZKDsprVKeGkf8grv9uW/hA1cgvbW+BgJ8ibA8mq916oEXayVN85ujFRoGwraATVGoQ5gWt46d43F1Mi+V9l0HjFWuMT45ZaPZJM7tA3cOiZI8xwLuRS81hXupKxjhFt88rdhFr8Kdeo6HfMsvsxeLqJQ8txW9IT3EUE/IMvvnJSOixfz3YpFp+ArGXjaWQ3xn5NhzEEHfcAHwYYEqol4ZNuOCvAH7rwm+IUIAfMIaObVXB9IM6bSgfUvRjZl9F4SkUpF1S37CAa+KgsoJCG2OQ9ynEfY54Qk/ZWlD80fRk26tYw6yZPCWGjPz2IfpSXc85tkM9VLLBzDaFUdq5AnZJEBcOkS10Lt7IAwZaEIAFqxOP18z3evCIZJc58ZoPoUmJc6rYpbet3geRqD0WmmMq4GOYCnpa1BsG92WhVDB9eSneBa6jh40amWgkBL+0vsslMlKGV9hpVplceV3Li3m/YY2VM5O4OymM4uVwsRNz4uXJH9OidQPTwyuvIl0AuDm0uMltBQLN2sOCErsWYYm8TGT/AjM3JsL8epNf5bwcMnVjzx/+CHu7cSrEiEu0H/kvjUyPRjw5p896+PQ4c2mMXL73TlTQeVqbUdV7oQSutYdKFdx/qeORRwJ3tZUjyV2KscTacI=
+  file_glob: true
   file: products/*
+  skip_cleanup: true
   on:
     repo: JuliaGeometry/TetgenBuilder
+    tags: true
