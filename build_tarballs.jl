@@ -14,10 +14,20 @@ script = raw"""
 cd $WORKSPACE/srcdir
 cd tetgen/
 cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain
-make
+make -j${ncore}
 mv tetgen ../../destdir/tetgen
 exit
 
+if [ $target = "x86_64-unknown-freebsd11.1" ]; then
+cd $WORKSPACE/srcdir
+cd tetgen/
+mkdir build
+cd build/
+cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
+make
+mv tetgen ../../../destdir/tetgen
+exit
+fi
 """
 
 # These are the platforms we will build for by default, unless further
@@ -33,6 +43,7 @@ platforms = [
     Linux(:aarch64, :musl),
     Linux(:armv7l, :musl, :eabihf),
     MacOS(:x86_64),
+    FreeBSD(:x86_64),
     Windows(:i686),
     Windows(:x86_64)
 ]
