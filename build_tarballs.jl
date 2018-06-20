@@ -6,28 +6,17 @@ using BinaryBuilder
 sources = [
     "https://github.com/ufz/tetgen.git" =>
     "9c4b70d479c6f67cb9e16dbe65f81ec3b821acad",
-
 ]
 
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
 cd tetgen/
-cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain
-make -j${ncore}
-mv tetgen ../../destdir/tetgen
-exit
-
-if [ $target = "x86_64-unknown-freebsd11.1" ]; then
-cd $WORKSPACE/srcdir
-cd tetgen/
 mkdir build
 cd build/
 cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
 make
-mv tetgen ../../../destdir/tetgen
 exit
-fi
 """
 
 # These are the platforms we will build for by default, unless further
@@ -60,4 +49,3 @@ dependencies = [
 
 # Build the tarballs, and possibly a `build.jl` as well.
 build_tarballs(ARGS, "tetgen", sources, script, platforms, products, dependencies)
-
