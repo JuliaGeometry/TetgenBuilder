@@ -6,7 +6,6 @@ using BinaryBuilder
 sources = [
     "https://github.com/ufz/tetgen.git" =>
     "9c4b70d479c6f67cb9e16dbe65f81ec3b821acad",
-
 ]
 
 # Bash recipe for building across all platforms
@@ -18,7 +17,7 @@ cd build/
 cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
 make
 mkdir ../../../destdir/bin/
-for f in tetgen*; do mv "$f" "../../../destdir/bin/tetgen"; done
+for f in tetgen*; do mv "$f" "../../../destdir/bin/$f"; done
 exit
 """
 
