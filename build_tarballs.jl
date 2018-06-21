@@ -6,6 +6,7 @@ using BinaryBuilder
 sources = [
     "https://github.com/ufz/tetgen.git" =>
     "9c4b70d479c6f67cb9e16dbe65f81ec3b821acad",
+
 ]
 
 # Bash recipe for building across all platforms
@@ -16,9 +17,11 @@ mkdir build
 cd build/
 cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
 make
-for f in tetgen*; do mv "$f" "../../../destdir/tetgen"; done
+mkdir ../../../destdir/bin/
+for f in tetgen*; do mv "$f" "../../../destdir/bin/tetgen"; done
 exit
 """
+
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
@@ -39,7 +42,7 @@ platforms = [
 
 # The products that we will ensure are always built
 products(prefix) = [
-    ExecutableProduct(prefix, "tetgen", :tetgen)
+    ExecutableProduct(prefix, "", :tetgen)
 ]
 
 # Dependencies that must be installed before this package can be built
