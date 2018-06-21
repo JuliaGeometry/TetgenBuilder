@@ -16,9 +16,9 @@ mkdir build
 cd build/
 cmake -DCMAKE_INSTALL_PREFIX=$prefix -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain ..
 make
+for f in tetgen*; do mv "$f" "../../../destdir/tetgen"; done
 exit
 """
-
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
 platforms = [
@@ -39,12 +39,12 @@ platforms = [
 
 # The products that we will ensure are always built
 products(prefix) = [
-    ExecutableProduct(prefix, "", :tetgen)
+    ExecutableProduct(prefix, "tetgen", :tetgen)
 ]
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
-    
+
 ]
 
 # Build the tarballs, and possibly a `build.jl` as well.
