@@ -10,7 +10,7 @@ sources = [
     "https://github.com/ufz/tetgen.git" =>
     "9c4b70d479c6f67cb9e16dbe65f81ec3b821acad",
     "https://github.com/JuliaGeometry/TetgenBuilder.git" =>
-    "80e7fe51fe98de3c4baf20eb0d8db32c83f85acf"
+    "f3fd2796459b3b4217ff4c240603e9193940b7ea"
 ]
 
 # Bash recipe for building across all platforms
@@ -22,7 +22,8 @@ ${CXX} -c -fPIC -std=c++11 -O3 -DTETLIBRARY -c tetgen.cxx -o tetgen.o
 libdir="lib"
 if [[ ${target} == *-mingw32 ]]; then     libdir="bin"; else     libdir="lib"; fi
 mkdir ${prefix}/${libdir}
-${CXX} $LDFLAGS -shared -fPIC tetgen.o predicates.o -DTETLIBRARY -o ${prefix}/${libdir}/libtet.${dlext} ../TetgenBuilder/cwrapper.cpp -L./
+cp tetgen.h ../TetgenBuilder/tetgen.h
+${CXX} $LDFLAGS -shared -fPIC tetgen.o predicates.o -DTETLIBRARY -o ${prefix}/${libdir}/libtet.${dlext} ../TetgenBuilder/cwrapper.cpp
 
 exit
 """
