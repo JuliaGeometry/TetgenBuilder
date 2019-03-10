@@ -22,7 +22,7 @@ ${CXX} -c -fPIC -std=c++11 -O3 -DTETLIBRARY -c tetgen.cxx -o tetgen.o
 libdir="lib"
 if [[ ${target} == *-mingw32 ]]; then     libdir="bin"; else     libdir="lib"; fi
 mkdir ${prefix}/${libdir}
-${CXX} $LDFLAGS -shared -fPIC tetgen.o predicates.o -DTETLIBRARY -o ${prefix}/${libdir}/libtet.${dlext} ../TetgenBuilder/cwrapper.cpp
+${CXX} $LDFLAGS -shared -fPIC tetgen.o predicates.o -DTETLIBRARY -o ${prefix}/${libdir}/libtet.${dlext} ../TetgenBuilder/cwrapper.cpp -L./
 
 exit
 """
