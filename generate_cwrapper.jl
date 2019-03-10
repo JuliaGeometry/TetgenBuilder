@@ -6,7 +6,7 @@ open("cwrapper.cpp", "w") do io
     """)
 
 
-    for (REAL, ext) in ["double" => "f64", "float" => "f32"]
+    for (REAL, ext) in ["double" => "f64"]
         println(io, """
         typedef struct {
           int firstnumber; // 0 or 1, default 0.
