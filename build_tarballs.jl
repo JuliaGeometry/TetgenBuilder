@@ -11,16 +11,18 @@ sources = [
     "9c4b70d479c6f67cb9e16dbe65f81ec3b821acad",
 ]
 
+include("generate_cwrapper.jl")
 # Bash recipe for building across all platforms
 script = raw"""
 cd $WORKSPACE/srcdir
 cd tetgen/
-${CXX} -fPIC -O0 -c predicates.cxx
-${CXX} -fPIC -DTETLIBRARY -c tetgen.cxx
+${CXX} -c -fPIC -std=c++11 -O3 -c predicates.cxx -o predicates.o
+${CXX} -c -fPIC -std=c++11 -O3 -DTETLIBRARY -c tetgen.cxx -o tetgen.o
 libdir="lib"
 if [[ ${target} == *-mingw32 ]]; then     libdir="bin"; else     libdir="lib"; fi
 mkdir ${prefix}/${libdir}
-${CXX} $LDFLAGS -shared -fPIC tetgen.o predicates.o -o ${prefix}/${libdir}/libtet.${dlext}
+${CXX} $LDFLAGS -shared -fPIC tetgen.o predicates.o -DTETLIBRARY -o ${prefix}/${libdir}/libtet.${dlext} cwrapper.cpp
+
 exit
 """
 
